@@ -104,11 +104,40 @@ class LinkedList {
 
   /** setAt(idx, val): set val at idx to val */
 
-  setAt(idx, val) {}
+  setAt(idx, val) {
+    if (idx < 0) {
+      throw new Error("idx does not exist");
+    }
+    let currIdx = 0;
+    let current = this.head;
+    while (currIdx !== idx) {
+      currIdx++;
+      current = current.next;
+      if (current === null) {
+        throw new Error("idx does not exist");
+      }
+    }
+    current.val = val;
+  }
 
   /** insertAt(idx, val): add node w/val before idx. */
 
-  insertAt(idx, val) {}
+  insertAt(idx, val) {
+    if (idx < 0) {
+      throw new Error("idx does not exist");
+    }
+    let currIdx = 0;
+    let current = this.head;
+    // while (currIdx !== idx - 1) {
+    //   currIdx++;
+    //   current = current.next;
+    //   if (current === null) {
+    //     throw new Error("idx does not exist");
+    //   }
+    // }
+    // let newNode = new Node(val);
+    // current.next = newNode;
+    // newNode.next =
 
   /** removeAt(idx): return & remove item at idx, */
 
