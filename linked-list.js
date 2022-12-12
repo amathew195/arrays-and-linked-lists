@@ -51,39 +51,36 @@ class LinkedList {
   /** pop(): return & remove last item. */
 
   pop() {
-    if (this.tail) {
-      let current = this.head;
+    if (!this.head) return undefined;
 
-      while (current !== null) {
-        if (current.next === this.tail && this.tail !== this.head) {
-          let oldTail = this.tail;
-          current.next = null;
-          this.tail = current;
-          this.length--;
-          return oldTail.val;
-        } else if (this.tail === this.head) {
-          let oldTail = this.tail;
-          this.head = null;
-          this.tail = null;
-          this.length--;
-          return oldTail.val;
-        }
-        current = current.next;
+    let current = this.head;
+
+    while (current !== null) {
+      let poppedVal = this.tail.val;
+      if (current.next === this.tail) {
+        current.next = null;
+        this.tail = current;
+      } else if (this.length === 1) {
+        this.tail = null;
+        this.head = null;
       }
+      this.length--;
+      return poppedVal;
     }
+    current = current.next;
   }
 
   /** shift(): return & remove first item. */
 
   shift() {
-    if (this.head) { //one
-      let removedEl = this.head;
+    if (this.head) {
+      let shiftedVal = this.head.val;
       if (this.length === 1) {
         this.tail = null;
       }
       this.head = this.head.next;
       this.length--;
-      return removedEl.val;
+      return shiftedVal;
     }
   }
 
