@@ -161,11 +161,68 @@ class LinkedList {
 
   /** removeAt(idx): return & remove item at idx, */
 
-  removeAt(idx) {}
+  removeAt(idx) {
+    if (idx < 0) {
+      throw new Error("idx does not exist");
+    }
+
+    if (this.length === 0) {
+      throw new Error("idx does not exist");
+    }
+
+    if (idx === 0) {
+      let deletedVal = this.head.val;
+      if (this.head.next === null) {
+        this.head = null;
+        this.tail = null;
+      } else {
+        this.head = this.head.next;
+      }
+      this.length--;
+      return deletedVal;
+    }
+
+    let currIdx = 0;
+    let current = this.head;
+
+    while (currIdx !== idx - 1) {
+      currIdx++;
+      current = current.next;
+      if (current === null) {
+        throw new Error("idx does not exist");
+      }
+    }
+
+    if (idx === this.length - 1) {
+      let deletedVal = current.next.val;
+      current.next = null;
+      this.tail = current;
+      this.length--;
+      return deletedVal;
+    }
+
+    let futureNode = current.next.next;
+    let deletedNodeVal = current.next.val;
+    current.next = futureNode;
+    this.length--;
+
+    return deletedNodeVal;
+  }
 
   /** average(): return an average of all values in the list */
 
-  average() {}
+  average() {
+    if (this.length === 0) return 0;
+    let current = this.head;
+    let sum = 0;
+    let length = 0;
+    while (current !== null) {
+      sum += current.val;
+      length++;
+      current = current.next;
+    }
+    return sum / length;
+  }
 }
 
 module.exports = LinkedList;
