@@ -126,18 +126,38 @@ class LinkedList {
     if (idx < 0) {
       throw new Error("idx does not exist");
     }
+    if (this.length === 0) {
+      if (idx > 0) {
+        throw new Error("idx does not exist");
+      } else {
+        this.push(val);
+        return;
+      }
+    }
+    if (idx === 0) {
+      this.unshift(val);
+      return;
+    }
+    if (idx === this.length) {
+      this.push(val);
+      return;
+    }
     let currIdx = 0;
-    let current = this.head;
-    // while (currIdx !== idx - 1) {
-    //   currIdx++;
-    //   current = current.next;
-    //   if (current === null) {
-    //     throw new Error("idx does not exist");
-    //   }
-    // }
-    // let newNode = new Node(val);
-    // current.next = newNode;
-    // newNode.next =
+    let current = this.head; //* Access head node of current instance
+    let futureNode;
+    while (currIdx !== idx - 1) {
+      currIdx++;
+      current = current.next;
+      if (current === null) {
+        throw new Error("idx does not exist");
+      }
+    }
+    futureNode = current.next;
+    let newNode = new Node(val);
+    current.next = newNode;
+    this.length++;
+    newNode.next = futureNode;
+  }
 
   /** removeAt(idx): return & remove item at idx, */
 
